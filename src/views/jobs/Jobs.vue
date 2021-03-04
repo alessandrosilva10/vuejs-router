@@ -6,16 +6,17 @@
       </router-link>
   </div>
 </template>
-404 pages and redirects
 <script>
 export default {
     data: () => ({
-        jobs: [
-            { id: 1, title: 'Ninja UX Designer', details: 'UX Designer' },
-            { id: 2, title: 'Ninja Web Designer', details: 'Web Designer' },
-            { id: 3, title: 'Ninja Vue Designer', details: 'Vue Designer'},
-        ]
-    })
+        jobs: []
+    }),
+    async mounted(){
+       await fetch('http://localhost:3000/jobs').
+        then((res) => res.json())
+        .then((data) => this.jobs = data)
+        .catch(err => console.error(err));
+    }
 }
 </script>
 
